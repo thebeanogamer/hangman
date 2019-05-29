@@ -95,19 +95,19 @@ while gameRunning:
     print('Welcome to Hangman!')
     onlineWords = requests.get(
         'https://svnweb.freebsd.org/csrg/share/dict/words?view=co&content-type=text/plain').content.decode(
-        "utf-8").split()
+        'utf-8').split()
     word = str(onlineWords[random.randint(0, len(onlineWords))].lower())
     guessBlank = '_' * len(word)
     stage = 0
     while not gameFinished:
         if '_' not in guessBlank:
-            print("You win!")
+            print('You win!')
             break
         if status != '':
             print(status)
-        print("Current guess: " + guessBlank)
+        print('Current guess: ' + guessBlank)
         drawMan(stage)
-        guess = input("What is your guess? ").lower()
+        guess = input('What is your guess? ').lower()
         if len(guess) == 1:
             if guess in letters:
                 if guess not in guessedChars:
@@ -115,24 +115,24 @@ while gameRunning:
                         for i in [pos for pos, char in enumerate(word) if char == guess]:
                             guessArray = list(guessBlank)
                             guessArray[i] = guess
-                            guessBlank = "".join(guessArray)
+                            guessBlank = ''.join(guessArray)
                     else:
                         stage += 1
-                        status = ("Nope!")
+                        status = 'Nope!'
                     guessedChars += guess
                 else:
-                    status = ("You've already tried that!")
+                    status = 'You\'ve already tried that!'
             else:
-                status = ("Letters only please!")
+                status = 'Letters only please!'
         else:
-            status = ("One at a time please!")
+            status = 'One at a time please!'
 
         if stage == 6:
             drawMan(stage)
-            print("\n\rHe's dead Jim!\n\rThe word was: " + word + "\n\r")
+            print('\n\rHe\'s dead Jim!\n\rThe word was: ' + word + '\n\r')
             break
         clearScreen()
 
-    if input("Do you want to play again (y/n)? ").lower() == "n":
+    if input('Do you want to play again (y/n)? ').lower() == 'n':
         status = ''
         break
