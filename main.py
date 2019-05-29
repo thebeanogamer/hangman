@@ -99,13 +99,6 @@ def createGuessed(word):
     return '_' * len(word)
 
 
-def gameLoop(word):
-    global guessBlank
-    global stage
-
-
-
-
 while gameRunning:
     clearScreen()
     print('Welcome to Hangman!')
