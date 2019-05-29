@@ -15,12 +15,6 @@ def clearScreen():
     else:
         os.system('clear')
 
-def pickWord():
-    onlineWords = requests.get(
-        'https://svnweb.freebsd.org/csrg/share/dict/words?view=co&content-type=text/plain').content.decode(
-        "utf-8").split()
-    return str(onlineWords[random.randint(0, len(onlineWords))].lower())
-
 
 def drawMan(stage):
     if stage == 0:
@@ -95,15 +89,15 @@ def drawMan(stage):
              |
             _|___''')
 
-def createGuessed(word):
-    return '_' * len(word)
-
 
 while gameRunning:
     clearScreen()
     print('Welcome to Hangman!')
-    word = pickWord()
-    guessBlank = createGuessed(word)
+    onlineWords = requests.get(
+        'https://svnweb.freebsd.org/csrg/share/dict/words?view=co&content-type=text/plain').content.decode(
+        "utf-8").split()
+    word = str(onlineWords[random.randint(0, len(onlineWords))].lower())
+    guessBlank = '_' * len(word)
     stage = 0
     while not gameFinished:
         if '_' not in guessBlank:
