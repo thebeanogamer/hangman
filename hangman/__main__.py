@@ -96,7 +96,6 @@ def start_round(word: str):
             if hanged_stage == 6:
                 draw_man(hanged_stage)
                 print("He's dead Jim!")
-                print('The word was: ' + word)
 
                 round_finished = True
             elif is_word_guessed(word, guessed_chars):
@@ -104,6 +103,8 @@ def start_round(word: str):
                 print('You won!')
 
                 round_finished = True
+
+    print('The word was: ' + word)
 
 if __name__ == "__main__":
     start_game()
