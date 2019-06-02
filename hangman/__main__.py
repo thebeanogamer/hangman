@@ -1,4 +1,4 @@
-import os
+from os import name, system
 from random import randint
 from string import ascii_lowercase as letters
 from typing import List
@@ -16,15 +16,14 @@ def get_word_list() -> List[str]:
 
 def get_random_word(word_list: List[str]) -> str:
     rand_index = randint(0, len(word_list))
-
     return word_list[rand_index]
 
 
 def clear_screen():
-    if os.name == 'nt':
-        os.system('cls')
+    if name == 'nt':
+        system('cls')
     else:
-        os.system('clear')
+        system('clear')
 
 
 def draw_man(stage_num):
