@@ -105,3 +105,6 @@ def start_round(word: str):
                 print('You won!')
 
                 round_finished = True
+
+if __name__ == "__main__":
+    start_game()

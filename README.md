@@ -1,6 +1,7 @@
 # Hangman
 
 A slightly sub-par Python game of Hangman, created when I should probably have been asleep.
+Start with `python -m hangman`
 
 ## Features
 * Hangman
