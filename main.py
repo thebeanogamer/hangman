@@ -2,21 +2,21 @@ import random
 import requests
 import os
 
-gameRunning = True
-gameFinished = False
-guessedChars = ''
+game_running = True
+game_finished = False
+guessed_chars = ''
 letters = 'abcdefghijklmnopqrstuvwxyz'
 status = ''
 
 
-def clearScreen():
+def clear_screen():
     if os.name == 'nt':
         os.system('cls')
     else:
         os.system('clear')
 
 
-def drawMan(stage):
+def draw_man(stage):
     if stage == 0:
         print('''
              _________
@@ -90,36 +90,36 @@ def drawMan(stage):
             _|___''')
 
 
-while gameRunning:
-    clearScreen()
+while game_running:
+    clear_screen()
     print('Welcome to Hangman!')
-    onlineWords = requests.get(
+    online_words = requests.get(
         'https://svnweb.freebsd.org/csrg/share/dict/words?view=co&content-type=text/plain').content.decode(
         'utf-8').split()
-    word = str(onlineWords[random.randint(0, len(onlineWords))].lower())
-    guessBlank = '_' * len(word)
+    word = str(online_words[random.randint(0, len(online_words))].lower())
+    guess_blank = '_' * len(word)
     stage = 0
-    while not gameFinished:
-        if '_' not in guessBlank:
+    while not game_finished:
+        if '_' not in guess_blank:
             print('You win!')
             break
         if status != '':
             print(status)
-        print('Current guess: ' + guessBlank)
-        drawMan(stage)
+        print('Current guess: ' + guess_blank)
+        draw_man(stage)
         guess = input('What is your guess? ').lower()
         if len(guess) == 1:
             if guess in letters:
-                if guess not in guessedChars:
+                if guess not in guessed_chars:
                     if guess in word:
                         for i in [pos for pos, char in enumerate(word) if char == guess]:
-                            guessArray = list(guessBlank)
-                            guessArray[i] = guess
-                            guessBlank = ''.join(guessArray)
+                            guess_array = list(guess_blank)
+                            guess_array[i] = guess
+                            guess_blank = ''.join(guess_array)
                     else:
                         stage += 1
                         status = 'Nope!'
-                    guessedChars += guess
+                    guessed_chars += guess
                 else:
                     status = 'You\'ve already tried that!'
             else:
@@ -128,10 +128,10 @@ while gameRunning:
             status = 'One at a time please!'
 
         if stage == 6:
-            drawMan(stage)
+            draw_man(stage)
             print('\n\rHe\'s dead Jim!\n\rThe word was: ' + word + '\n\r')
             break
-        clearScreen()
+        clear_screen()
 
     if input('Do you want to play again (y/n)? ').lower() == 'n':
         status = ''
