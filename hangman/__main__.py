@@ -74,6 +74,7 @@ def start_round(word: str):
     while not round_finished:
         guess_blank = get_blanked_word(word, guessed_chars)
 
+        print("You've tried: " + guessed_chars)
         print('Current guess: ' + guess_blank)
         draw_man(hanged_stage)
         guess = input('What is your guess? ').lower()
