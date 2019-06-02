@@ -1,11 +1,14 @@
-import random
-import requests
 import os
+from random import randint
+from string import ascii_lowercase as letters
+
+import requests
+
+from hangman.stages import stages
 
 game_running = True
 game_finished = False
 guessed_chars = ''
-letters = 'abcdefghijklmnopqrstuvwxyz'
 status = ''
 
 
@@ -16,79 +19,8 @@ def clear_screen():
         os.system('clear')
 
 
-def draw_man(stage):
-    if stage == 0:
-        print('''
-             _________
-             |/      |
-             |      
-             |      
-             |       
-             |      
-             |
-            _|___
-            ''')
-    elif stage == 1:
-        print('''
-             _________
-             |/      |
-             |      (_)
-             |       
-             |       
-             |      
-             |
-            _|___''')
-    elif stage == 2:
-        print('''
-             _________
-             |/      |
-             |      (_)
-             |       |
-             |       |
-             |      
-             |
-            _|___''')
-    elif stage == 3:
-        print('''
-             _________
-             |/      |
-             |      (_)
-             |      \|
-             |       |
-             |      
-             |
-            _|___''')
-    elif stage == 4:
-        print('''
-             _________
-             |/      |
-             |      (_)
-             |      \|/
-             |       |
-             |      
-             |
-            _|___''')
-    elif stage == 5:
-        print('''
-             _________
-             |/      |
-             |      (_)
-             |      \|/
-             |       |
-             |      / 
-             |
-            _|___''')
-    elif stage == 6:
-        print('''
-             _________
-             |/      |
-             |      (_)
-             |      \|/
-             |       |
-             |      / \\
-             |
-            _|___''')
-
+def draw_man(stage_num):
+    print(stages[stage_num])
 
 while game_running:
     clear_screen()
@@ -96,7 +28,7 @@ while game_running:
     online_words = requests.get(
         'https://svnweb.freebsd.org/csrg/share/dict/words?view=co&content-type=text/plain').content.decode(
         'utf-8').split()
-    word = str(online_words[random.randint(0, len(online_words))].lower())
+    word = str(online_words[randint(0, len(online_words))].lower())
     guess_blank = '_' * len(word)
     stage = 0
     while not game_finished:
