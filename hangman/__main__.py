@@ -60,7 +60,6 @@ def start_game():
 
         word = get_random_word(word_list)
         start_round(word)
-        clear_screen()
 
         choice = input('Do you want to play again? (y/N): ')
         if not choice.lower().startswith('y'):
