@@ -4,7 +4,6 @@ from string import ascii_lowercase as letters
 from typing import List
 
 import requests
-
 from hangman.stages import stages
 
 
