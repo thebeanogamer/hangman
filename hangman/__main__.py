@@ -4,7 +4,6 @@ from string import ascii_lowercase as letters
 from typing import List
 
 import requests
-
 from hangman.stages import stages
 
 
@@ -105,6 +104,7 @@ def start_round(word: str):
                 round_finished = True
 
     print('The word was: ' + word)
+
 
 if __name__ == "__main__":
     start_game()
