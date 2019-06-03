@@ -1,6 +1,7 @@
 # Hangman
 
 A slightly sub-par Python game of Hangman, created when I should probably have been asleep.
+Start with `python -m hangman`
 
 ## Features
 * Hangman
@@ -12,5 +13,4 @@ A slightly sub-par Python game of Hangman, created when I should probably have b
 * A burning desire to go to bed
 
 ## Todo
-* Persistence between games
 * The ability to set maximum and minimum word length
